@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Join Chat</title>
+  <style>
+    body{
+      margin:0; 
+      min-height:100vh; 
+      display:flex; 
+      flex-direction:column;
+      justify-content:center; 
+      align-items:center; 
+      gap:20px;
+
+      background: url("./your-image.jpeg") no-repeat center center fixed;
+      background-size: cover;
+
+      color:#fff;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      text-align:center; 
+      padding:24px;
+    }
+
+    .hook {
+      max-width: 700px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+      line-height: 1.5;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+    }
+
+    .label {
+      color:#FFFFFF;
+      font-weight:800;
+      margin-bottom:4px;
+      font-size:1.7rem;
+    }
+
+    .video-wrap {
+      position:relative;
+      display:inline-block;
+      margin-top:8px;
+    }
+    .vid{
+      width: min(50vw, 360px);
+      border-radius:12px;
+      box-shadow:0 8px 24px rgba(0,0,0,.35);
+      background:#000;
+    }
+    .overlay{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,.55);
+      border-radius:12px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .overlay-content{
+      display:flex; 
+      flex-direction:column; 
+      align-items:center; 
+      gap:10px;
+      font-weight:800; 
+      font-size:1.05rem;
+      color:#fff;
+      text-shadow:0 1px 2px rgba(0,0,0,.5);
+    }
+    .play-icon{
+      width:64px; height:64px; border-radius:50%;
+      background:#0A192F;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 8px 24px rgba(0,0,0,.45);
+    }
+    .play-icon svg{ width:28px; height:28px; fill:#3B82F6; }
+
+    .btn{
+      display:inline-block; 
+      text-decoration:none; 
+      border:none; 
+      cursor:pointer;
+      padding:20px 30px; 
+      border-radius:16px; 
+      background:#0A192F;  
+      color:#3B82F6;       
+      font-weight:800; 
+      font-size:1.1rem; 
+      line-height:1.25;
+      box-shadow:0 10px 30px rgba(0,0,0,.5);
+      margin-top:10px;
+      max-width:500px;
+      white-space:normal; 
+      text-align:center;
+      transition: all 0.25s ease;
+    }
+    .btn:hover {
+      background:#1E293B; 
+      color:#60A5FA;
+    }
+
+    @media (max-width: 768px) {
+      body { background-attachment: scroll; }
+      .vid { 
+        width: 75vw;
+        max-width: 360px;
+        border-radius:16px; 
+        box-shadow:0 6px 18px rgba(0,0,0,.5);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hook">
+    You might know the conspiracy that sports betting is rigged, 
+    but do you really know how… why… and who’s behind it?
+  </div>
+
+  <div class="label">How To Join Video</div>
+
+  <div class="video-wrap">
+    <video id="v1" class="vid" preload="auto">
+      <source src="video1.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <div id="tapOverlay" class="overlay" role="button" tabindex="0" aria-label="Tap to play">
+      <div class="overlay-content">
+        <div class="play-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div>Tap to play</div>
+      </div>
+    </div>
+  </div>
+
+  <a class="btn" href="https://t.me/gameovernba" target="_blank" rel="noopener noreferrer">
+    Hold This Button To Join Game Over
+  </a>
+
+  <script>
+    (function(){
+      const video   = document.getElementById('v1');
+      const overlay = document.getElementById('tapOverlay');
+
+      overlay.style.display = 'flex';
+
+      function activate() {
+        video.controls = true;
+        video.muted = false;
+
+        // Fullscreen
+        if (video.requestFullscreen) {
+          video.requestFullscreen();
+        } else if (video.webkitRequestFullscreen) {
+          video.webkitRequestFullscreen();
+        } else if (video.msRequestFullscreen) {
+          video.msRequestFullscreen();
+        }
+
+        video.play().then(() => {
+          overlay.style.display = 'none';
+        }).catch(() => {
+          overlay.style.display = 'flex';
+        });
+      }
+
+      overlay.addEventListener('click', activate);
+      overlay.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
+      });
+
+      const link = document.querySelector('.btn');
+      if (link) {
+        const url = link.href;
+        link.addEventListener('click', function(e){
+          e.preventDefault();
+          setTimeout(function(){
+            const win = window.open(url, '_blank', 'noopener,noreferrer');
+            if (!win) window.location.href = url;
+          }, 60000);
+        }, {passive:false});
+      }
+    })();
+  </script>
+</body>
+</html>
